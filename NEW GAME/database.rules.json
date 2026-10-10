@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$room": {
+        "players": {
+          ".read": "auth != null",
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['uid', 'name', 'mode', 'dropSite', 'x', 'y', 'z', 'yaw', 'color', 'health', 'team', 'weapon', 'updatedAt']) && newData.child('uid').val() === $uid && newData.child('name').isString() && newData.child('name').val().length <= 16 && (newData.child('mode').val() === 'ffa' || newData.child('mode').val() === 'teams' || newData.child('mode').val() === 'survival' || newData.child('mode').val() === 'battle-royale') && (newData.child('dropSite').val() === 'ash-harbor' || newData.child('dropSite').val() === 'boneyard' || newData.child('dropSite').val() === 'red-mesa' || newData.child('dropSite').val() === 'oasis' || newData.child('dropSite').val() === 'dust-town' || newData.child('dropSite').val() === 'iron-quarry') && newData.child('x').isNumber() && newData.child('y').isNumber() && newData.child('z').isNumber() && newData.child('yaw').isNumber() && newData.child('color').isString() && newData.child('health').isNumber() && newData.child('health').val() >= 0 && newData.child('health').val() <= 100 && newData.child('team').isNumber() && newData.child('team').val() >= 0 && newData.child('team').val() <= 1 && newData.child('weapon').isString() && (newData.child('weapon').val() === 'rifle' || newData.child('weapon').val() === 'smg' || newData.child('weapon').val() === 'dmr' || newData.child('weapon').val() === 'shotgun') && newData.child('updatedAt').isNumber() && (!newData.child('lastEvent').exists() || (newData.child('lastEvent').child('id').isString() && newData.child('lastEvent').child('createdAt').isNumber() && (newData.child('lastEvent').child('type').val() === 'shot' || newData.child('lastEvent').child('type').val() === 'hit')))"
+          }
+        }
+      }
+    }
+  }
+}
